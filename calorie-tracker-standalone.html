@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سعراتي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--card:#1c1c1e;--tx:#fff;--mu:#8e8e93;--tr:#2c2c2e;--wd:#3a3a3c;--or:#f28c28;--bl:#4fb3f6;--ye:#f2c230;--rd:#e0342d;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
+:root[data-theme="dark"]{color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Cairo',system-ui,sans-serif}
+.app{max-width:480px;margin:auto;padding:14px 16px 130px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.top h1{margin:0;font-size:24px;font-weight:800;line-height:1.2}
+.top small{color:var(--mu);font-size:14px}
+.ctl{display:flex;gap:8px}
+.cb{height:46px;border-radius:99px;background:var(--card);border:1px solid var(--tr);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:inherit;padding:0;min-width:46px;cursor:pointer}
+.cb.w{padding:0 8px 0 14px;color:var(--mu);direction:ltr}
+.cb.w i{width:32px;height:32px;border-radius:50%;background:var(--wd);display:flex;align-items:center;justify-content:center;color:var(--tx);font-style:normal}
+.week{display:flex;gap:8px;margin-bottom:22px;padding:3px}
+.wd{flex:1;aspect-ratio:1;border:0;background:none;padding:0;position:relative;color:var(--tx);font:inherit;font-weight:600;cursor:pointer;border-radius:50%}
+.wd svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.wd span{position:relative}
+.wd.sel{outline:2px solid #fff;outline-offset:3px}
+.card{background:var(--card);border-radius:28px;padding:20px;margin-bottom:14px}
+.big{display:flex;align-items:center;justify-content:space-between;min-height:150px}
+.big .n{font-size:68px;font-weight:800;line-height:1}
+.big .s{color:var(--mu);font-size:17px;margin-top:10px;cursor:pointer}
+.ring{position:relative;width:140px;height:140px;flex:none}
+.ring svg{width:100%;height:100%;transform:scaleX(-1) rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;filter:grayscale(1) brightness(2)}
+.mac{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.mc{background:var(--card);border-radius:22px;padding:14px}
+.mc small{color:var(--mu);font-size:14px}
+.mc div{display:flex;align-items:baseline;gap:4px;margin:2px 0 8px}
+.mc b{font-size:28px;font-weight:800}
+.mc span{color:var(--mu);font-size:12px;direction:ltr}
+.tk{height:6px;background:#000;border-radius:9px;overflow:hidden}
+.tk i{display:block;height:100%;border-radius:9px}
+.dv{display:flex;align-items:center;gap:14px;color:var(--mu);margin:6px 4px 16px}
+.dv:before,.dv:after{content:"";flex:1;height:1px;background:var(--tr)}
+.meal{display:flex;gap:14px;align-items:center;background:var(--card);border-radius:26px;padding:16px;margin-bottom:12px;cursor:pointer}
+.me{font-size:44px;width:56px;text-align:center;flex:none}
+.mb{flex:1;min-width:0}
+.mt{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.mt b{font-size:19px;font-weight:600;line-height:1.4}
+.mt small{color:var(--mu);font-size:12px;white-space:nowrap;margin-top:4px}
+.mm{display:flex;align-items:center;gap:12px;margin-top:6px;font-size:15px;flex-wrap:wrap}
+.mm .k{color:var(--mu);font-size:13px}.mm .k b{color:var(--tx);font-size:18px;font-weight:800}
+.mm .sp{width:1px;height:22px;background:var(--wd)}
+.mm em{font-style:normal;direction:ltr;font-weight:600}
+.mm em:before{content:"●";margin-inline-end:5px;font-size:11px;color:var(--c)}
+.empty{text-align:center;color:var(--mu);padding:30px 0}
+.bar{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:0 16px;display:flex;gap:12px;z-index:5}
+.nav{flex:1;display:flex;background:var(--card);border:1px solid var(--tr);border-radius:40px;padding:6px;gap:4px;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.nav button{flex:1;border:0;background:none;color:var(--tx);font:inherit;font-size:12px;border-radius:30px;padding:8px 0;cursor:pointer}
+.nav button span{display:block;font-size:22px;line-height:1.2}
+.nav button.on{background:var(--wd);color:var(--or)}
+.fab{width:76px;height:76px;flex:none;border-radius:50%;border:0;background:var(--or);color:#fff;font-size:44px;font-weight:300;cursor:pointer;box-shadow:0 8px 24px rgba(242,140,40,.4)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--card);width:100%;max-width:480px;max-height:90vh;overflow:auto;border-radius:30px 30px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px))}
+.sheet h2{margin:0;font-size:19px}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.x{border:0;background:none;color:var(--mu);font-size:28px;cursor:pointer}
+textarea,input,select{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--tr);border-radius:16px;padding:12px;margin:4px 0}
+textarea{min-height:96px;resize:none}
+label{font-size:13px;color:var(--mu)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn{border:0;background:var(--or);color:#fff;font:inherit;font-weight:600;border-radius:16px;padding:13px;cursor:pointer;width:100%;margin-top:6px}
+.btn.sec{background:var(--wd)}.btn.red{background:#4a1d1b;color:#ff6b61}
+.btn:disabled{opacity:.5}
+.mu{color:var(--mu);font-size:13px}.er{color:#ff6b61;font-size:14px}
+.sub{border:1px solid var(--tr);border-radius:18px;padding:10px;margin:8px 0}
+.msg{padding:10px 14px;border-radius:20px;margin:6px 0;max-width:86%;white-space:pre-wrap;font-size:15px;line-height:1.7}
+.msg.u{background:var(--or);color:#fff;margin-inline-start:auto}
+.msg.a{background:var(--card)}
+.ci{display:flex;gap:6px;margin-top:10px}.ci input{margin:0}.ci button{width:auto;padding:0 18px;margin:0}
+.toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:9px 16px;border-radius:99px;font-size:14px;z-index:20}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div id="layer"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ar=s=>String(s).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]).replace(/\./g,'٫');
+const K='sa3rati_v1';
+const DEF={sex:'m',age:25,h:170,w:70,act:1.375,goal:0,kcal:2200,p:165,c:275,f:49};
+let S=null;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=S.key||'AQ.Ab8RN6Kc3cK82wsPIpwPwWpBtaG3stG0_sdW2pE2Fu6fmaqp9Q';S.model=S.model||'gemini-2.5-flash';
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const dk=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')};
+const pd=k=>{const[a,b,c]=k.split('-');return new Date(+a,+b-1,+c)};
+const today=dk(new Date());
+let cur=today,tab='home',AI=null,chat=[],imgOK=false;
+(async()=>{try{if(window.claude){AI=await claude.use('sample');try{imgOK=!!(await AI.limits()).images}catch(e){}}}catch(e){AI=null}render()})();
+const norm=o=>({name:String(o.name||'وجبة'),emoji:o.emoji||'🍽️',kcal:Math.round(+o.kcal||0),p:Math.round(+o.p||0),c:Math.round(+o.c||0),f:Math.round(+o.f||0)});
+const day=d=>S.logs[d]||[];
+const tot=d=>day(d).reduce((a,i)=>({k:a.k+i.kcal,p:a.p+i.p,c:a.c+i.c,f:a.f+i.f}),{k:0,p:0,c:0,f:0});
+const toast=t=>{const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2600)};
+function streak(){let n=0,d=new Date();if(!day(dk(d)).length)d.setDate(d.getDate()-1);while(day(dk(d)).length){n++;d.setDate(d.getDate()-1)}return n}
+
+/* ---------- AI: Gemini (if key) else built-in ---------- */
+async function gem(contents,json){
+  const body={contents,generationConfig:json?{temperature:0,responseMimeType:'application/json'}:{temperature:.5}};
+  const m=encodeURIComponent(S.model),k=encodeURIComponent(S.key);
+  const urls=[`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${k}`];
+  if(S.key.startsWith('AQ.'))urls.push(`https://aiplatform.googleapis.com/v1/publishers/google/models/${m}:generateContent?key=${k}`);
+  let last=new Error('gemini');const errs=[];const tag=u=>u.includes('aiplatform')?1:0;
+  for(const u of urls)for(let a=0;a<2;a++){
+    try{
+      const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const j=await r.json();
+      if(r.ok){const t=((j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts)||[]).map(p=>p.text||'').join('');if(t)return t;last=new Error('رد فاضي من Gemini')}
+      else{last=new Error((j.error&&j.error.message)||('HTTP '+r.status));errs[tag(u)]=['Gemini','Vertex'][tag(u)]+' ('+r.status+'): '+last.message;if(![429,500,503].includes(r.status))break}
+    }catch(e){last=e;errs[tag(u)]=['Gemini','Vertex'][tag(u)]+': '+((e&&e.message)||e)}
+    await new Promise(z=>setTimeout(z,900));
+  }
+  throw new Error(errs.filter(Boolean).join(' || ')||last.message);
+}
+async function gemLegacy(contents,json){
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(S.model)}:generateContent?key=${encodeURIComponent(S.key)}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents,generationConfig:json?{temperature:.2,responseMimeType:'application/json'}:{temperature:.5}})});
+  const j=await r.json();if(!r.ok)throw new Error((j.error&&j.error.message)||'gemini');
+  return j.candidates[0].content.parts.map(p=>p.text||'').join('');
+}
+const b64=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result.split(',')[1]);r.onerror=no;r.readAsDataURL(f)});
+async function askJSON(q,img){
+  if(S.key){try{const parts=[{text:q}];if(img)parts.push({inlineData:{mimeType:'image/jpeg',data:await b64(img)}});return JSON.parse((await gem([{role:'user',parts}],true)).replace(/```json|```/g,'').trim())}catch(e){if(!AI)throw e}}
+  if(AI)return AI.json(q,img?{cache:false,images:[img]}:{cache:false});
+  throw new Error('no-ai');
+}
+async function askChat(msgs,on){
+  if(S.key){try{const t=await gem(msgs.map(m=>({role:m.role==='user'?'user':'model',parts:[{text:m.content}]})));on(t);return t}catch(e){if(!AI)throw e}}
+  if(AI){const r=await AI(msgs,{cache:false,onText:({text})=>on(text)});return r.text}
+  throw new Error('no-ai');
+}
+
+/* ---------- render ---------- */
+function render(){
+  const A=$('#app');
+  A.innerHTML=(tab==='home'?home():tab==='progress'?progress():coachV())+`<div class="bar"><div class="nav">${[['home','🍴','وجباتي'],['progress','📅','التقدم'],['coach','💬','المساعد']].map(t=>`<button class="${tab===t[0]?'on':''}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('')}</div><button class="fab" onclick="openAdd()" aria-label="إضافة وجبة">+</button></div>`;
+  if(tab==='coach')scrollTo(0,document.body.scrollHeight);
+}
+const go=t=>{tab=t;render()};
+const L=['ح','ن','ث','ر','خ','ج','س'];
+function home(){
+  const P=S.profile,t=tot(cur),cd=pd(cur),C=2*Math.PI*54;
+  const st=new Date(cd);st.setDate(st.getDate()-((cd.getDay()+1)%7));
+  const days=[...Array(7)].map((_,i)=>{const d=new Date(st);d.setDate(st.getDate()+i);return d}),en=days[6];
+  const mo=d=>d.toLocaleDateString('ar-EG',{month:'long'});
+  const ws=S.weights,delta=ws.length>1?ws[ws.length-1].w-ws[0].w:0;
+  // ring segments
+  let segs=[[t.c*4,'var(--or)'],[t.f*9,'var(--rd)'],[t.p*4,'var(--bl)']],sum=segs.reduce((a,s)=>a+s[0],0),sc=sum>P.kcal?P.kcal/sum:1,cum=0;
+  const arcs=segs.map(s=>{const l=s[0]/P.kcal*sc*C,r=`<circle cx="70" cy="70" r="54" fill="none" stroke="${s[1]}" stroke-width="15" stroke-dasharray="${l} ${C-l}" stroke-dashoffset="${-cum}"/>`;cum+=l;return r}).join('');
+  const mb=(n,v,g,c)=>`<div class="mc"><small>${n}</small><div><b>${ar(v)}</b><span>/ ${ar(g)}g</span></div><div class="tk" style="margin:0"><i style="width:${Math.min(100,v/g*100)}%;background:${c}"></i></div></div>`;
+  const ms=day(cur).slice().sort((a,b)=>b.t-a.t);
+  return `<div class="top"><div><h1>${mo(cd)} ${ar(String(cd.getDate()).padStart(2,'0'))}</h1><small>${mo(st)} ${ar(String(st.getDate()).padStart(2,'0'))} - ${mo(en)} ${ar(String(en.getDate()).padStart(2,'0'))}</small></div>
+  <div class="ctl"><button class="cb w" onclick="openWeight()"><span>kg ${ar(Math.abs(delta).toFixed(1))}</span><i>${delta<0?'↓':delta>0?'↑':'→'}</i></button><button class="cb" onclick="openSettings()" aria-label="الإعدادات">⚙️</button></div></div>
+  <div class="week">${days.map(d=>{const k=dk(d),p=Math.min(1,tot(k).k/P.kcal),c=2*Math.PI*21;return `<button class="wd ${k===cur?'sel':''}" onclick="cur='${k}';render()"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="var(--wd)"/><circle cx="24" cy="24" r="21" fill="none" stroke="var(--or)" stroke-width="4" stroke-linecap="round" stroke-dasharray="${p*c} ${c}" opacity="${p?1:0}"/></svg><span>${L[d.getDay()]}</span></button>`}).join('')}</div>
+  <div class="card big"><div><div class="n">${ar(t.k)}</div><div class="s" onclick="openSettings()">من ${ar(P.kcal)} سعر حراري ✎</div></div>
+  <div class="ring"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="54" fill="none" stroke="#000" stroke-width="15"/>${arcs}</svg><b>🥕</b></div></div>
+  <div class="mac">${mb('البروتينات',t.p,P.p,'var(--bl)')}${mb('الكربوهيدرات',t.c,P.c,'var(--ye)')}${mb('دهون',t.f,P.f,'var(--rd)')}</div>
+  <div class="dv">الوجبات</div>
+  ${ms.length?ms.map(i=>`<div class="meal" onclick="editMeal('${i.id}')"><div class="me">${esc(i.emoji||'🍽️')}</div><div class="mb"><div class="mt"><b>${esc(i.name)}</b><small>${i.t?new Date(i.t).toLocaleTimeString('ar-EG',{hour:'numeric',minute:'2-digit'}):''}</small></div>
+  <div class="mm"><span class="k"><b>${ar(i.kcal)}</b> كيلو كالوري 🥕</span><i class="sp"></i><em style="--c:var(--bl)">${ar(i.p)} g</em><em style="--c:var(--ye)">${ar(i.c)} g</em><em style="--c:var(--rd)">${ar(i.f)} g</em></div></div></div>`).join(''):'<div class="empty">لسه مفيش وجبات في اليوم ده.<br>اضغط + واكتب اللي أكلته 🍽️</div>'}`;
+}
+
+/* ---------- add / edit meal ---------- */
+let txt='',res=null,busy=false,err='',editId=null,img=null,imgUrl='';
+const closeS=()=>$('#layer').innerHTML='';
+const wrap=h=>$('#layer').innerHTML=`<div class="ov" onclick="if(event.target===this)closeS()"><div class="sheet">${h}</div></div>`;
+const SYS=`أنت أخصائي تغذية دقيق جدًا. مهمتك تقدير السعرات والماكروز لوجبة المستخدم بأعلى دقة ممكنة ومن غير تخمين عشوائي.
+القواعد:
+1) حلّل كل مكوّن لوحده (مثلًا: رغيف عيش بلدي، فول، زيت، بيضة) ثم اجمعهم في عنصر واحد للوجبة. لو الوصف فيه وجبات منفصلة تمامًا (زي فطار وعشا) رجّع عنصر لكل وجبة.
+2) حوّل كل كمية لجرامات بوزن الأكل وهو جاهز للأكل (مطبوخ لو بيتأكل مطبوخ). لو الكمية مش مذكورة افترض حصة متوسطة واقعية واكتبها في note. لو في صورة قدّر الحصة من حجم الطبق والأدوات الموجودة.
+3) استخدم قيم USDA وجداول التغذية المعروفة، وللأكل المصري (رغيف بلدي، فول مدمس، طعمية، كشري، ملوخية، محشي...) استخدم أوزان وقيم الحصص المصرية الشائعة. احسب الزيت والسمن والسكر المستخدم في التقلية والطبخ ولا تهمله.
+4) الأرقام لازم تتّسق: kcal تقريبًا = 4×بروتين + 4×كارب + 9×دهون (فرق أقصاه 10%). راجع حسابك قبل الرد.
+5) الأرقام للكمية الكاملة اللي المستخدم أكلها مش لكل 100 جم، وكلها أرقام صحيحة بدون كسور.
+6) لو النص مش أكل أو مفيهوش معلومات تكفي للتقدير رجّع {"items":[]}.
+7) رجّع JSON صالح فقط بدون أي نص تاني بالشكل: {"items":[{"name":"اسم مختصر بالعربي مع الكمية","emoji":"إيموجي واحد","note":"المكونات والأوزان اللي افترضتها بجمل قصيرة","kcal":0,"p":0,"c":0,"f":0}]} حيث p بروتين وc كارب وf دهون بالجرام.`;
+function fixAI(o){const x=norm(o),c=Math.round(x.p*4+x.c*4+x.f*9);if(c>0&&(!x.kcal||Math.abs(x.kcal-c)/c>.12))x.kcal=c;x.kcal=Math.min(x.kcal,4000);x.note=String(o.note||'').slice(0,300);return x}
+function openAdd(){img=null;imgUrl='';txt='';res=null;busy=false;err='';editId=null;sheet()}
+function pick(i){const f=i.files[0];if(!f)return;const im=new Image();im.onload=()=>{const s=Math.min(1,1024/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);c.toBlob(b=>{img=b;imgUrl=URL.createObjectURL(b);sheet()},'image/jpeg',.82)};im.src=URL.createObjectURL(f)}
+function sheet(){
+  wrap(`<div class="hd"><h2>${editId?'تعديل الوجبة':'إضافة وجبة'}</h2><button class="x" onclick="closeS()">×</button></div>
+  ${res?resHTML():`<textarea id="txt" placeholder="اكتب وجبتك… مثلاً: طبق فول بالزيت وبيضتين و٢ رغيف عيش بلدي" oninput="txt=this.value">${esc(txt)}</textarea>
+  ${imgOK||S.key?`${imgUrl?`<img src="${imgUrl}" alt="" style="width:100%;max-height:160px;object-fit:cover;border-radius:16px;margin:6px 0">`:''}<label class="btn sec" style="display:block;text-align:center">📷 ${imgUrl?'غيّر الصورة':'صوّر وجبتك'}<input type="file" accept="image/*" capture="environment" hidden onchange="pick(this)"></label>`:''}
+  ${err?`<p class="er">${err}</p>`:''}
+  <button class="btn" ${busy?'disabled':''} onclick="analyze()">${busy?'بحسب السعرات…':'✨ احسب السعرات'}</button>
+  <button class="btn sec" onclick="res=[norm({})];sheet()">إدخال يدوي</button>`}`);
+}
+async function analyze(){
+  if(!txt.trim()&&!img){err='اكتب وصف الوجبة أو صوّرها';return sheet()}
+  busy=true;err='';sheet();
+  const q='أنت خبير تغذية. حلل الوجبة التالية (الأكل غالبًا مصري) وقدّر السعرات والماكروز للكميات المذكورة، ولو الكمية مش مذكورة افترض حصة عادية. لو الوصف وجبة واحدة رجّع عنصر واحد باسم مختصر، ولو أكلات منفصلة تمامًا رجّع عنصر لكل واحدة. رجّع JSON فقط بالشكل {"items":[{"name":"اسم بالعربي","emoji":"إيموجي واحد مناسب","kcal":0,"p":0,"c":0,"f":0}]} حيث p بروتين وc كارب وf دهون بالجرام. وصف المستخدم: '+(txt.trim()||'(الوجبة في الصورة المرفقة)');
+  try{const r=await askJSON(SYS+'\n\nوصف المستخدم: '+(txt.trim()||'(الوجبة في الصورة المرفقة، حللها بدقة)'),img);res=(r.items||[]).map(fixAI);if(!res.length)throw 0}
+  catch(e){err=e&&e.message==='no-ai'?'الذكاء الاصطناعي مش متاح. ضيف مفتاح Gemini من الإعدادات أو استخدم الإدخال اليدوي.':'معرفتش أحسب الوجبة: '+esc((e&&e.message)||'جرّب وصف أوضح')}
+  busy=false;sheet();
+}
+function resHTML(){return `${editId?'':'<p class="mu">راجع التقدير وعدّله لو حابب:</p>'}${res.map((r,i)=>`<div class="sub"><input value="${esc(r.name)}" placeholder="اسم الوجبة" onchange="res[${i}].name=this.value">${r.note?`<p class="mu">📏 ${esc(r.note)}</p>`:''}<div class="g2"><div><label>سعرات</label><input type="number" value="${r.kcal}" onchange="res[${i}].kcal=+this.value"></div><div><label>بروتين (جم)</label><input type="number" value="${r.p}" onchange="res[${i}].p=+this.value"></div><div><label>كارب (جم)</label><input type="number" value="${r.c}" onchange="res[${i}].c=+this.value"></div><div><label>دهون (جم)</label><input type="number" value="${r.f}" onchange="res[${i}].f=+this.value"></div></div></div>`).join('')}
+  <div class="g2">${editId?`<button class="btn red" onclick="delMeal()">حذف</button><button class="btn" onclick="saveMeal()">حفظ</button>`:`<button class="btn sec" onclick="res=null;sheet()">رجوع</button><button class="btn" onclick="addItems()">✓ أضف</button>`}</div>`}
+const uid=()=>Math.random().toString(36).slice(2);
+function addItems(){S.logs[cur]=day(cur).concat(res.map(i=>({...norm(i),id:uid(),t:Date.now()})));save();closeS();render();toast('اتضافت ✓')}
+function editMeal(id){const m=day(cur).find(i=>i.id===id);if(!m)return;editId=id;res=[{...m}];sheet()}
+function saveMeal(){S.logs[cur]=day(cur).map(i=>i.id===editId?{...i,...norm(res[0])}:i);save();closeS();render()}
+function delMeal(){S.logs[cur]=day(cur).filter(i=>i.id!==editId);save();closeS();render()}
+
+/* ---------- weight ---------- */
+function openWeight(){const W=S.weights.slice(-6).reverse();wrap(`<div class="hd"><h2>⚖️ الوزن</h2><button class="x" onclick="closeS()">×</button></div>
+  <div class="g2"><input id="wt" type="number" step="0.1" placeholder="وزنك اليوم (كجم)"><button class="btn" style="margin:4px 0" onclick="addW()">سجّل</button></div>
+  ${W.map(w=>`<div class="sub" style="display:flex;justify-content:space-between"><span class="mu">${ar(w.d)}</span><b>${ar(w.w)} كجم</b></div>`).join('')||'<p class="mu">سجّل وزنك بانتظام وهتشوف التغيير هنا.</p>'}`)}
+function addW(){const v=+$('#wt').value;if(!v)return;S.weights=S.weights.filter(w=>w.d!==today).concat({d:today,w:v});S.profile.w=v;save();closeS();render()}
+
+/* ---------- progress ---------- */
+function progress(){
+  const P=S.profile,ds=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return d}),vs=ds.map(d=>tot(dk(d)).k);
+  const mx=Math.max(P.kcal*1.2,...vs),avg=Math.round(vs.reduce((a,b)=>a+b,0)/7),ly=150-P.kcal/mx*130;
+  const bars=ds.map((d,i)=>{const h=vs[i]/mx*130;return `<rect x="${i*44+12}" y="${150-h}" width="26" height="${h}" rx="8" fill="${vs[i]>P.kcal?'var(--rd)':'var(--or)'}"/><text x="${i*44+25}" y="168" font-size="12" text-anchor="middle" fill="var(--mu)">${L[d.getDay()]}</text>`}).join('');
+  return `<div class="top"><h1>التقدم</h1><span class="cb" style="padding:0 14px">🔥 ${ar(streak())} يوم</span></div>
+  <div class="card"><div class="mt"><b>آخر ٧ أيام</b><small>المتوسط ${ar(avg)} سعر</small></div>
+  <svg viewBox="0 0 320 175" width="100%"><line x1="0" x2="320" y1="${ly}" y2="${ly}" stroke="var(--mu)" stroke-dasharray="4 4"/>${bars}</svg></div>
+  <div class="card"><b>متوسط الماكروز اليومي (٧ أيام)</b><p class="mu">${(()=>{const s=ds.map(d=>tot(dk(d)));const a=k=>Math.round(s.reduce((x,y)=>x+y[k],0)/7);return `بروتين ${ar(a('p'))}g · كارب ${ar(a('c'))}g · دهون ${ar(a('f'))}g`})()}</p></div>`;
+}
+
+/* ---------- coach ---------- */
+function coachV(){
+  return `<div class="top"><h1>المساعد 💬</h1></div>
+  ${chat.length?chat.map(m=>`<div class="msg ${m.role==='user'?'u':'a'}">${esc(m.content)}</div>`).join(''):`<div class="card"><p>اسألني عن أكلك: بدائل صحية، وجبة تكمّل أهدافك، أو أي سؤال عن التغذية.</p>${['اقترح عشا يكمل سعراتي','إيه بدائل للأكل المقلي؟','هل أكلي النهارده متوازن؟'].map(q=>`<button class="btn sec" onclick="ask('${q}')">${q}</button>`).join('')}</div>`}
+  <div class="ci"><input id="ci" placeholder="اكتب سؤالك…" onkeydown="if(event.key==='Enter')ask()"><button class="btn" onclick="ask()">إرسال</button></div>`;
+}
+async function ask(q){
+  const i=$('#ci');q=q||(i&&i.value.trim());if(!q)return;
+  chat.push({role:'user',content:q},{role:'assistant',content:'…'});render();
+  const P=S.profile,t=tot(today);
+  const ctx=`أنت مدرب تغذية ودود بتتكلم مصري. هدف المستخدم اليومي ${P.kcal} سعر (بروتين ${P.p}جم، كارب ${P.c}جم، دهون ${P.f}جم). أكل النهارده لحد دلوقتي: ${t.k} سعر، بروتين ${t.p}، كارب ${t.c}، دهون ${t.f}. الوجبات: ${day(today).map(x=>x.name).join('، ')||'لسه مفيش'}. جاوب باختصار وبشكل عملي.`;
+  const m=chat.slice(0,-1).slice(-7).map(x=>({...x}));m[m.length-1].content=ctx+'\n\nالسؤال: '+q;
+  const on=t=>{chat[chat.length-1].content=t;const e=document.querySelectorAll('.msg.a');if(e.length)e[e.length-1].textContent=t};
+  try{await askChat(m,on)}catch(e){chat[chat.length-1].content=e.message==='no-ai'?'المساعد مش متاح. ضيف مفتاح Gemini من الإعدادات.':'حصل خطأ، جرب تاني.'}
+  render();
+}
+
+/* ---------- settings ---------- */
+function openSettings(){
+  const P=S.profile,o=(v,l,s)=>`<option value="${v}" ${String(s)===String(v)?'selected':''}>${l}</option>`;
+  wrap(`<div class="hd"><h2>الإعدادات</h2><button class="x" onclick="closeS()">×</button></div>
+  <div class="sub"><b>الأهداف اليومية</b><div class="g2"><div><label>سعرات</label><input id="gk" type="number" value="${P.kcal}"></div><div><label>بروتين (جم)</label><input id="gp" type="number" value="${P.p}"></div><div><label>كارب (جم)</label><input id="gc" type="number" value="${P.c}"></div><div><label>دهون (جم)</label><input id="gf" type="number" value="${P.f}"></div></div></div>
+  <div class="sub"><b>احسبلي أهدافي</b><div class="g2"><div><label>النوع</label><select id="sx">${o('m','ذكر',P.sex)}${o('f','أنثى',P.sex)}</select></div><div><label>السن</label><input id="ag" type="number" value="${P.age}"></div><div><label>الطول (سم)</label><input id="ht" type="number" value="${P.h}"></div><div><label>الوزن (كجم)</label><input id="wg" type="number" value="${P.w}"></div></div>
+  <label>النشاط</label><select id="ac">${o(1.2,'قليل (مكتبي)',P.act)}${o(1.375,'خفيف (٢-٣ تمارين)',P.act)}${o(1.55,'متوسط (٤-٥ تمارين)',P.act)}${o(1.725,'عالي (يومي)',P.act)}</select>
+  <label>الهدف</label><select id="gl">${o(-500,'خسارة وزن',P.goal)}${o(0,'تثبيت الوزن',P.goal)}${o(400,'زيادة وزن',P.goal)}</select>
+  <button class="btn sec" onclick="calc()">احسب تلقائيًا</button></div>
+  <div class="sub"><b>مفتاح Gemini API</b><input id="ky" type="password" dir="ltr" placeholder="AIza…" value="${esc(S.key)}"><label>الموديل</label><input id="md" dir="ltr" value="${esc(S.model)}">
+  <p class="mu">المفتاح بيتحفظ في متصفحك بس. الاتصال بـ Gemini بيشتغل لما تفتح الملف على جهازك أو استضافتك، ومش بيشتغل جوه صفحة claude.ai (بتستخدم الذكاء المدمج بدلها).</p></div>
+  <button class="btn" onclick="saveP()">حفظ</button>
+  <button class="btn red" onclick="if(confirm('مسح كل البيانات؟')){S={};localStorage.removeItem(K);location.reload()}">مسح كل البيانات</button>`);
+}
+function calc(){
+  const v=id=>+$('#'+id).value,w=v('wg'),bmr=10*w+6.25*v('ht')-5*v('ag')+($('#sx').value==='m'?5:-161);
+  const k=Math.max(1200,Math.round(bmr*v('ac')+v('gl')));
+  const p=Math.round(w*1.8),f=Math.round(k*.27/9),c=Math.max(0,Math.round((k-p*4-f*9)/4));
+  $('#gk').value=k;$('#gp').value=p;$('#gc').value=c;$('#gf').value=f;toast('اتحسبت الأهداف ✓');
+}
+function saveP(){
+  const v=id=>+$('#'+id).value;
+  S.profile={sex:$('#sx').value,age:v('ag'),h:v('ht'),w:v('wg'),act:v('ac'),goal:v('gl'),kcal:v('gk')||2000,p:v('gp'),c:v('gc'),f:v('gf')};
+  S.key=$('#ky').value.trim();S.model=$('#md').value.trim()||'gemini-2.5-flash';
+  save();closeS();render();
+}
+render();
+</script>
+</body>
+</html>
