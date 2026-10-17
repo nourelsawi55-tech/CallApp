@@ -90,7 +90,7 @@ const ar=s=>String(s).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]).replace(/\./g,
 const K='sa3rati_v1';
 const DEF={sex:'m',age:25,h:170,w:70,act:1.375,goal:0,kcal:2200,p:165,c:275,f:49};
 let S=null;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
-S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=S.key||'AQ.Ab8RN6Kc3cK82wsPIpwPwWpBtaG3stG0_sdW2pE2Fu6fmaqp9Q';S.model=S.model||'gemini-2.5-flash';
+S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=/^gsk_/.test(S.key||'')?S.key:'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';S.model=(S.model&&!/gemini/.test(S.model))?S.model:'llama-3.3-70b-versatile';
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
 const dk=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')};
 const pd=k=>{const[a,b,c]=k.split('-');return new Date(+a,+b-1,+c)};
@@ -103,28 +103,33 @@ const tot=d=>day(d).reduce((a,i)=>({k:a.k+i.kcal,p:a.p+i.p,c:a.c+i.c,f:a.f+i.f})
 const toast=t=>{const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2600)};
 function streak(){let n=0,d=new Date();if(!day(dk(d)).length)d.setDate(d.getDate()-1);while(day(dk(d)).length){n++;d.setDate(d.getDate()-1)}return n}
 
-/* ---------- AI: Gemini (if key) else built-in ---------- */
+/* ---------- AI: Groq (if key) else built-in ---------- */
+const VM='meta-llama/llama-4-scout-17b-16e-instruct';
 async function gem(contents,json){
-  const body={contents,generationConfig:json?{temperature:0,responseMimeType:'application/json'}:{temperature:.5}};
-  const m=encodeURIComponent(S.model),k=encodeURIComponent(S.key);
-  const urls=[`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${k}`];
-  if(S.key.startsWith('AQ.'))urls.push(`https://aiplatform.googleapis.com/v1/publishers/google/models/${m}:generateContent?key=${k}`);
-  let last=new Error('gemini');const errs=[];const tag=u=>u.includes('aiplatform')?1:0;
-  for(const u of urls)for(let a=0;a<2;a++){
+  let vis=false;
+  const messages=contents.map(c=>{
+    const tx=c.parts.filter(x=>x.text!=null).map(x=>x.text).join('\n'),im=c.parts.filter(x=>x.inlineData);
+    if(im.length){vis=true;return{role:'user',content:[{type:'text',text:tx},...im.map(x=>({type:'image_url',image_url:{url:'data:'+x.inlineData.mimeType+';base64,'+x.inlineData.data}}))]}}
+    return{role:c.role==='model'?'assistant':'user',content:tx};
+  });
+  const body={model:vis?VM:S.model,messages,temperature:json?0:.5,max_tokens:1500};
+  if(json&&!vis)body.response_format={type:'json_object'};
+  let last=new Error('Groq');
+  for(let a=0;a<3;a++){
+    let fatal=false;
     try{
-      const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+S.key},body:JSON.stringify(body)});
       const j=await r.json();
-      if(r.ok){const t=((j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts)||[]).map(p=>p.text||'').join('');if(t)return t;last=new Error('رد فاضي من Gemini')}
-      else{last=new Error((j.error&&j.error.message)||('HTTP '+r.status));errs[tag(u)]=['Gemini','Vertex'][tag(u)]+' ('+r.status+'): '+last.message;if(![429,500,503].includes(r.status))break}
-    }catch(e){last=e;errs[tag(u)]=['Gemini','Vertex'][tag(u)]+': '+((e&&e.message)||e)}
-    await new Promise(z=>setTimeout(z,900));
+      if(r.ok){
+        let t=(j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content)||'';
+        if(json){const i=t.indexOf('{'),k=t.lastIndexOf('}');if(i>=0&&k>i)t=t.slice(i,k+1)}
+        if(t)return t;last=new Error('رد فاضي من Groq');
+      }else{last=new Error('Groq ('+r.status+'): '+((j.error&&j.error.message)||'خطأ'));fatal=![429,500,503].includes(r.status)}
+    }catch(e){last=e}
+    if(fatal)break;
+    await new Promise(z=>setTimeout(z,1200*(a+1)));
   }
-  throw new Error(errs.filter(Boolean).join(' || ')||last.message);
-}
-async function gemLegacy(contents,json){
-  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(S.model)}:generateContent?key=${encodeURIComponent(S.key)}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents,generationConfig:json?{temperature:.2,responseMimeType:'application/json'}:{temperature:.5}})});
-  const j=await r.json();if(!r.ok)throw new Error((j.error&&j.error.message)||'gemini');
-  return j.candidates[0].content.parts.map(p=>p.text||'').join('');
+  throw last;
 }
 const b64=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result.split(',')[1]);r.onerror=no;r.readAsDataURL(f)});
 async function askJSON(q,img){
@@ -197,7 +202,7 @@ async function analyze(){
   busy=true;err='';sheet();
   const q='أنت خبير تغذية. حلل الوجبة التالية (الأكل غالبًا مصري) وقدّر السعرات والماكروز للكميات المذكورة، ولو الكمية مش مذكورة افترض حصة عادية. لو الوصف وجبة واحدة رجّع عنصر واحد باسم مختصر، ولو أكلات منفصلة تمامًا رجّع عنصر لكل واحدة. رجّع JSON فقط بالشكل {"items":[{"name":"اسم بالعربي","emoji":"إيموجي واحد مناسب","kcal":0,"p":0,"c":0,"f":0}]} حيث p بروتين وc كارب وf دهون بالجرام. وصف المستخدم: '+(txt.trim()||'(الوجبة في الصورة المرفقة)');
   try{const r=await askJSON(SYS+'\n\nوصف المستخدم: '+(txt.trim()||'(الوجبة في الصورة المرفقة، حللها بدقة)'),img);res=(r.items||[]).map(fixAI);if(!res.length)throw 0}
-  catch(e){err=e&&e.message==='no-ai'?'الذكاء الاصطناعي مش متاح. ضيف مفتاح Gemini من الإعدادات أو استخدم الإدخال اليدوي.':'معرفتش أحسب الوجبة: '+esc((e&&e.message)||'جرّب وصف أوضح')}
+  catch(e){err=e&&e.message==='no-ai'?'الذكاء الاصطناعي مش متاح. ضيف مفتاح Groq من الإعدادات أو استخدم الإدخال اليدوي.':'معرفتش أحسب الوجبة: '+esc((e&&e.message)||'جرّب وصف أوضح')}
   busy=false;sheet();
 }
 function resHTML(){return `${editId?'':'<p class="mu">راجع التقدير وعدّله لو حابب:</p>'}${res.map((r,i)=>`<div class="sub"><input value="${esc(r.name)}" placeholder="اسم الوجبة" onchange="res[${i}].name=this.value">${r.note?`<p class="mu">📏 ${esc(r.note)}</p>`:''}<div class="g2"><div><label>سعرات</label><input type="number" value="${r.kcal}" onchange="res[${i}].kcal=+this.value"></div><div><label>بروتين (جم)</label><input type="number" value="${r.p}" onchange="res[${i}].p=+this.value"></div><div><label>كارب (جم)</label><input type="number" value="${r.c}" onchange="res[${i}].c=+this.value"></div><div><label>دهون (جم)</label><input type="number" value="${r.f}" onchange="res[${i}].f=+this.value"></div></div></div>`).join('')}
@@ -238,7 +243,7 @@ async function ask(q){
   const ctx=`أنت مدرب تغذية ودود بتتكلم مصري. هدف المستخدم اليومي ${P.kcal} سعر (بروتين ${P.p}جم، كارب ${P.c}جم، دهون ${P.f}جم). أكل النهارده لحد دلوقتي: ${t.k} سعر، بروتين ${t.p}، كارب ${t.c}، دهون ${t.f}. الوجبات: ${day(today).map(x=>x.name).join('، ')||'لسه مفيش'}. جاوب باختصار وبشكل عملي.`;
   const m=chat.slice(0,-1).slice(-7).map(x=>({...x}));m[m.length-1].content=ctx+'\n\nالسؤال: '+q;
   const on=t=>{chat[chat.length-1].content=t;const e=document.querySelectorAll('.msg.a');if(e.length)e[e.length-1].textContent=t};
-  try{await askChat(m,on)}catch(e){chat[chat.length-1].content=e.message==='no-ai'?'المساعد مش متاح. ضيف مفتاح Gemini من الإعدادات.':'حصل خطأ، جرب تاني.'}
+  try{await askChat(m,on)}catch(e){chat[chat.length-1].content=e.message==='no-ai'?'المساعد مش متاح. ضيف مفتاح Groq من الإعدادات.':'حصل خطأ، جرب تاني.'}
   render();
 }
 
@@ -251,8 +256,8 @@ function openSettings(){
   <label>النشاط</label><select id="ac">${o(1.2,'قليل (مكتبي)',P.act)}${o(1.375,'خفيف (٢-٣ تمارين)',P.act)}${o(1.55,'متوسط (٤-٥ تمارين)',P.act)}${o(1.725,'عالي (يومي)',P.act)}</select>
   <label>الهدف</label><select id="gl">${o(-500,'خسارة وزن',P.goal)}${o(0,'تثبيت الوزن',P.goal)}${o(400,'زيادة وزن',P.goal)}</select>
   <button class="btn sec" onclick="calc()">احسب تلقائيًا</button></div>
-  <div class="sub"><b>مفتاح Gemini API</b><input id="ky" type="password" dir="ltr" placeholder="AIza…" value="${esc(S.key)}"><label>الموديل</label><input id="md" dir="ltr" value="${esc(S.model)}">
-  <p class="mu">المفتاح بيتحفظ في متصفحك بس. الاتصال بـ Gemini بيشتغل لما تفتح الملف على جهازك أو استضافتك، ومش بيشتغل جوه صفحة claude.ai (بتستخدم الذكاء المدمج بدلها).</p></div>
+  <div class="sub"><b>مفتاح Groq API</b><input id="ky" type="password" dir="ltr" placeholder="gsk_…" value="${esc(S.key)}"><label>الموديل</label><input id="md" dir="ltr" value="${esc(S.model)}">
+  <p class="mu">المفتاح بيتحفظ في متصفحك بس. الاتصال بـ Groq بيشتغل لما تفتح الملف على جهازك أو استضافتك، ومش بيشتغل جوه صفحة claude.ai (بتستخدم الذكاء المدمج بدلها).</p></div>
   <button class="btn" onclick="saveP()">حفظ</button>
   <button class="btn red" onclick="if(confirm('مسح كل البيانات؟')){S={};localStorage.removeItem(K);location.reload()}">مسح كل البيانات</button>`);
 }
@@ -265,7 +270,7 @@ function calc(){
 function saveP(){
   const v=id=>+$('#'+id).value;
   S.profile={sex:$('#sx').value,age:v('ag'),h:v('ht'),w:v('wg'),act:v('ac'),goal:v('gl'),kcal:v('gk')||2000,p:v('gp'),c:v('gc'),f:v('gf')};
-  S.key=$('#ky').value.trim();S.model=$('#md').value.trim()||'gemini-2.5-flash';
+  S.key=$('#ky').value.trim();S.model=$('#md').value.trim()||'llama-3.3-70b-versatile';
   save();closeS();render();
 }
 render();
