@@ -90,7 +90,7 @@ const ar=s=>String(s).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]).replace(/\./g,
 const K='sa3rati_v1';
 const DEF={sex:'m',age:25,h:170,w:70,act:1.375,goal:0,kcal:2200,p:165,c:275,f:49};
 let S=null;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
-S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=/^gsk_/.test(S.key||'')?S.key:'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';S.model=(S.model&&!/gemini/.test(S.model))?S.model:'llama-3.3-70b-versatile';
+S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=/^gsk_/.test(S.key||'')?S.key:'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';S.model=(S.model&&!/gemini/.test(S.model)&&S.model!=='llama-3.3-70b-versatile')?S.model:'auto';
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
 const dk=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')};
 const pd=k=>{const[a,b,c]=k.split('-');return new Date(+a,+b-1,+c)};
@@ -104,7 +104,22 @@ const toast=t=>{const e=document.createElement('div');e.className='toast';e.text
 function streak(){let n=0,d=new Date();if(!day(dk(d)).length)d.setDate(d.getDate()-1);while(day(dk(d)).length){n++;d.setDate(d.getDate()-1)}return n}
 
 /* ---------- AI: Groq (if key) else built-in ---------- */
-const VM='meta-llama/llama-4-scout-17b-16e-instruct';
+const PREF=['openai/gpt-oss-120b','llama-3.3-70b-versatile','openai/gpt-oss-20b','llama-3.1-8b-instant'],VPREF=['meta-llama/llama-4-scout-17b-16e-instruct','meta-llama/llama-4-maverick-17b-128e-instruct'];
+let AV=null;
+async function avail(){
+  if(AV)return AV;
+  const r=await fetch('https://api.groq.com/openai/v1/models',{headers:{Authorization:'Bearer '+S.key}});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error('Groq ('+r.status+'): '+((j.error&&j.error.message)||'خطأ'));
+  return AV=(j.data||[]).map(m=>m.id);
+}
+async function pickModel(vis){
+  const a=await avail(),bad=/guard|whisper|tts|compound|embed|orpheus|distil/;
+  const c=vis?VPREF:[...(S.model&&S.model!=='auto'?[S.model]:[]),...PREF];
+  const m=c.find(x=>a.includes(x))||a.find(x=>!bad.test(x)&&(vis?/llama-4|vision|scout|maverick/.test(x):/gpt-oss|llama|qwen|kimi/.test(x)));
+  if(!m)throw new Error((vis?'مفيش موديل بيقرا الصور على حسابك':'مفيش موديل نصي متاح على حسابك')+' — المتاح: '+a.slice(0,10).join(', '));
+  return m;
+}
 async function gem(contents,json){
   let vis=false;
   const messages=contents.map(c=>{
@@ -112,7 +127,9 @@ async function gem(contents,json){
     if(im.length){vis=true;return{role:'user',content:[{type:'text',text:tx},...im.map(x=>({type:'image_url',image_url:{url:'data:'+x.inlineData.mimeType+';base64,'+x.inlineData.data}}))]}}
     return{role:c.role==='model'?'assistant':'user',content:tx};
   });
-  const body={model:vis?VM:S.model,messages,temperature:json?0:.5,max_tokens:1500};
+  const model=await pickModel(vis);
+  const body={model,messages,temperature:json?0:.5,max_tokens:4000};
+  if(/gpt-oss/.test(model))body.reasoning_effort='low';
   if(json&&!vis)body.response_format={type:'json_object'};
   let last=new Error('Groq');
   for(let a=0;a<3;a++){
@@ -123,8 +140,8 @@ async function gem(contents,json){
       if(r.ok){
         let t=(j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content)||'';
         if(json){const i=t.indexOf('{'),k=t.lastIndexOf('}');if(i>=0&&k>i)t=t.slice(i,k+1)}
-        if(t)return t;last=new Error('رد فاضي من Groq');
-      }else{last=new Error('Groq ('+r.status+'): '+((j.error&&j.error.message)||'خطأ'));fatal=![429,500,503].includes(r.status)}
+        if(t)return t;last=new Error('رد فاضي من Groq ('+model+')');
+      }else{last=new Error('Groq ('+r.status+', '+model+'): '+((j.error&&j.error.message)||'خطأ'));fatal=![429,500,503].includes(r.status)}
     }catch(e){last=e}
     if(fatal)break;
     await new Promise(z=>setTimeout(z,1200*(a+1)));
@@ -270,7 +287,7 @@ function calc(){
 function saveP(){
   const v=id=>+$('#'+id).value;
   S.profile={sex:$('#sx').value,age:v('ag'),h:v('ht'),w:v('wg'),act:v('ac'),goal:v('gl'),kcal:v('gk')||2000,p:v('gp'),c:v('gc'),f:v('gf')};
-  S.key=$('#ky').value.trim();S.model=$('#md').value.trim()||'llama-3.3-70b-versatile';
+  S.key=$('#ky').value.trim();S.model=$('#md').value.trim()||'auto';
   save();closeS();render();
 }
 render();
