@@ -2,13 +2,22 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#000">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>سعراتي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--card:#1c1c1e;--tx:#fff;--mu:#8e8e93;--tr:#2c2c2e;--wd:#3a3a3c;--or:#f28c28;--bl:#4fb3f6;--ye:#f2c230;--rd:#e0342d;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
-:root[data-theme="dark"]{color-scheme:dark}
+html{background:var(--bg)}
+:root{--bg:#000;--card:#1c1c1e;--tx:#fff;--mu:#8e8e93;--tr:#2c2c2e;--wd:#3a3a3c;--tk:#000;--or:#f28c28;--on:#fff;--bl:#4fb3f6;--ye:#f2c230;--rd:#e0342d;--cr:#f28c28;--rbg:#4a1d1b;--rtx:#ff6b61;--sh:rgba(0,0,0,.6);--rf:grayscale(1) brightness(2);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-theme="orange"]{--bg:#000;--card:#1c1c1e;--tx:#fff;--mu:#8e8e93;--tr:#2c2c2e;--wd:#3a3a3c;--tk:#000;--or:#f28c28;--on:#fff;--bl:#4fb3f6;--ye:#f2c230;--rd:#e0342d;--cr:#f28c28;--rbg:#4a1d1b;--rtx:#ff6b61;--sh:rgba(0,0,0,.6);--rf:grayscale(1) brightness(2);color-scheme:dark}
+[data-theme="mint"]{--bg:#050d0a;--card:#12201a;--tx:#eafff6;--mu:#86a398;--tr:#1d3128;--wd:#2a4437;--tk:#050d0a;--or:#34d399;--on:#04130c;--bl:#5eb6ff;--ye:#f2d04b;--rd:#ff7a6b;--cr:#f2d04b;--rbg:#3a1c1a;--rtx:#ff8a7d;--sh:rgba(0,0,0,.6);--rf:grayscale(1) brightness(2);color-scheme:dark}
+[data-theme="ocean"]{--bg:#040a17;--card:#0f1a30;--tx:#eaf2ff;--mu:#8da2c4;--tr:#1a2a49;--wd:#263a5f;--tk:#040a17;--or:#4da3ff;--on:#04101f;--bl:#a78bfa;--ye:#ffd166;--rd:#ff6b6b;--cr:#ffd166;--rbg:#3a1a24;--rtx:#ff8b8b;--sh:rgba(0,0,0,.6);--rf:grayscale(1) brightness(2);color-scheme:dark}
+[data-theme="sunset"]{--bg:#12060b;--card:#26101a;--tx:#fff0f4;--mu:#b58c9a;--tr:#3a1b29;--wd:#4a2536;--tk:#12060b;--or:#ff5d8f;--on:#2a0612;--bl:#5cc8ff;--ye:#ffc857;--rd:#ff7a45;--cr:#ffc857;--rbg:#4a1a1a;--rtx:#ff8f7a;--sh:rgba(0,0,0,.6);--rf:grayscale(1) brightness(2);color-scheme:dark}
+[data-theme="violet"]{--bg:#09061a;--card:#17112e;--tx:#f1edff;--mu:#9a90c4;--tr:#251c4a;--wd:#33285f;--tk:#09061a;--or:#a78bfa;--on:#12082e;--bl:#4fd1ff;--ye:#ffd166;--rd:#ff6b8a;--cr:#ffd166;--rbg:#3d1a2c;--rtx:#ff8fa8;--sh:rgba(0,0,0,.6);--rf:grayscale(1) brightness(2);color-scheme:dark}
+[data-theme="mono"]{--bg:#000;--card:#141414;--tx:#fff;--mu:#8a8a8a;--tr:#262626;--wd:#333;--tk:#000;--or:#fff;--on:#000;--bl:#6cb6ff;--ye:#f0c53c;--rd:#ff5a4f;--cr:#f0c53c;--rbg:#2e1514;--rtx:#ff6b61;--sh:rgba(0,0,0,.6);--rf:grayscale(1) brightness(2);color-scheme:dark}
+[data-theme="day"]{--bg:#f2f2f7;--card:#fff;--tx:#1c1c1e;--mu:#6e6e73;--tr:#e5e5ea;--wd:#e5e5ea;--tk:#e5e5ea;--or:#f28c28;--on:#fff;--bl:#1d8fe0;--ye:#e0a100;--rd:#d92d27;--cr:#f28c28;--rbg:#fde7e5;--rtx:#c9302a;--sh:rgba(0,0,0,.14);--rf:grayscale(1) brightness(.5);color-scheme:light}
+[data-theme="sage"]{--bg:#eef2ea;--card:#fbfdf9;--tx:#1b2a1f;--mu:#667a6b;--tr:#dde6d8;--wd:#dfe8da;--tk:#dde6d8;--or:#2f9e5b;--on:#fff;--bl:#2b7fd6;--ye:#d99a00;--rd:#d6453d;--cr:#d99a00;--rbg:#fbe4e1;--rtx:#c23a32;--sh:rgba(20,40,25,.14);--rf:grayscale(1) brightness(.5);color-scheme:light}
+[data-theme="rose"]{--bg:#fbf1f3;--card:#fff;--tx:#2a1218;--mu:#8b6a73;--tr:#f1dde2;--wd:#f3e1e6;--tk:#f1dde2;--or:#e0457b;--on:#fff;--bl:#3a86d9;--ye:#e0a100;--rd:#d9480f;--cr:#e0a100;--rbg:#fde4e0;--rtx:#c0392b;--sh:rgba(80,20,40,.14);--rf:grayscale(1) brightness(.5);color-scheme:light}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:'Cairo',system-ui,sans-serif}
 .app{max-width:480px;margin:auto;padding:14px 16px 130px}
@@ -23,21 +32,21 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:'Cairo',system-ui
 .wd{flex:1;aspect-ratio:1;border:0;background:none;padding:0;position:relative;color:var(--tx);font:inherit;font-weight:600;cursor:pointer;border-radius:50%}
 .wd svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
 .wd span{position:relative}
-.wd.sel{outline:2px solid #fff;outline-offset:3px}
+.wd.sel{outline:2px solid var(--tx);outline-offset:3px}
 .card{background:var(--card);border-radius:28px;padding:20px;margin-bottom:14px}
 .big{display:flex;align-items:center;justify-content:space-between;min-height:150px}
 .big .n{font-size:68px;font-weight:800;line-height:1}
 .big .s{color:var(--mu);font-size:17px;margin-top:10px;cursor:pointer}
 .ring{position:relative;width:140px;height:140px;flex:none}
 .ring svg{width:100%;height:100%;transform:scaleX(-1) rotate(-90deg)}
-.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;filter:grayscale(1) brightness(2)}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;filter:var(--rf)}
 .mac{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
 .mc{background:var(--card);border-radius:22px;padding:14px}
 .mc small{color:var(--mu);font-size:14px}
 .mc div{display:flex;align-items:baseline;gap:4px;margin:2px 0 8px}
 .mc b{font-size:28px;font-weight:800}
 .mc span{color:var(--mu);font-size:12px;direction:ltr}
-.tk{height:6px;background:#000;border-radius:9px;overflow:hidden}
+.tk{height:6px;background:var(--tk);border-radius:9px;overflow:hidden}
 .tk i{display:block;height:100%;border-radius:9px}
 .dv{display:flex;align-items:center;gap:14px;color:var(--mu);margin:6px 4px 16px}
 .dv:before,.dv:after{content:"";flex:1;height:1px;background:var(--tr)}
@@ -54,11 +63,11 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:'Cairo',system-ui
 .mm em:before{content:"●";margin-inline-end:5px;font-size:11px;color:var(--c)}
 .empty{text-align:center;color:var(--mu);padding:30px 0}
 .bar{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:0 16px;display:flex;gap:12px;z-index:5}
-.nav{flex:1;display:flex;background:var(--card);border:1px solid var(--tr);border-radius:40px;padding:6px;gap:4px;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.nav{flex:1;display:flex;background:var(--card);border:1px solid var(--tr);border-radius:40px;padding:6px;gap:4px;box-shadow:0 8px 30px var(--sh)}
 .nav button{flex:1;border:0;background:none;color:var(--tx);font:inherit;font-size:12px;border-radius:30px;padding:8px 0;cursor:pointer}
 .nav button span{display:block;font-size:22px;line-height:1.2}
 .nav button.on{background:var(--wd);color:var(--or)}
-.fab{width:76px;height:76px;flex:none;border-radius:50%;border:0;background:var(--or);color:#fff;font-size:44px;font-weight:300;cursor:pointer;box-shadow:0 8px 24px rgba(242,140,40,.4)}
+.fab{width:76px;height:76px;flex:none;border-radius:50%;border:0;background:var(--or);color:var(--on);font-size:44px;font-weight:300;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.35);box-shadow:0 8px 24px color-mix(in srgb,var(--or) 40%,transparent)}
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10;display:flex;align-items:flex-end;justify-content:center}
 .sheet{background:var(--card);width:100%;max-width:480px;max-height:90vh;overflow:auto;border-radius:30px 30px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px))}
 .sheet h2{margin:0;font-size:19px}
@@ -68,30 +77,89 @@ textarea,input,select{width:100%;font:inherit;color:var(--tx);background:var(--b
 textarea{min-height:96px;resize:none}
 label{font-size:13px;color:var(--mu)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.btn{border:0;background:var(--or);color:#fff;font:inherit;font-weight:600;border-radius:16px;padding:13px;cursor:pointer;width:100%;margin-top:6px}
-.btn.sec{background:var(--wd)}.btn.red{background:#4a1d1b;color:#ff6b61}
+.btn{border:0;background:var(--or);color:var(--on);font:inherit;font-weight:600;border-radius:16px;padding:13px;cursor:pointer;width:100%;margin-top:6px}
+.btn.sec{background:var(--wd)}.btn.red{background:var(--rbg);color:var(--rtx)}
 .btn:disabled{opacity:.5}
-.mu{color:var(--mu);font-size:13px}.er{color:#ff6b61;font-size:14px}
+.mu{color:var(--mu);font-size:13px}.er{color:var(--rtx);font-size:14px}
 .sub{border:1px solid var(--tr);border-radius:18px;padding:10px;margin:8px 0}
 .msg{padding:10px 14px;border-radius:20px;margin:6px 0;max-width:86%;white-space:pre-wrap;font-size:15px;line-height:1.7}
-.msg.u{background:var(--or);color:#fff;margin-inline-start:auto}
+.msg.u{background:var(--or);color:var(--on);margin-inline-start:auto}
 .msg.a{background:var(--card)}
 .ci{display:flex;gap:6px;margin-top:10px}.ci input{margin:0}.ci button{width:auto;padding:0 18px;margin:0}
-.toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:9px 16px;border-radius:99px;font-size:14px;z-index:20}
+.toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:9px 16px;border-radius:99px;font-size:14px;z-index:20}
+
+/* settings */
+.stp{position:fixed;inset:0;z-index:15;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.sth{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,calc((100% - 480px)/2)) 10px;background:var(--bg);background:color-mix(in srgb,var(--bg) 72%,transparent);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
+.sth h1{margin:0;font-size:18px;font-weight:700;text-align:center}
+.stc{width:46px;height:46px;border-radius:50%;border:1px solid var(--tr);background:var(--card);color:var(--tx);display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+.stin{max-width:480px;margin:0 auto;padding:6px 16px calc(48px + env(safe-area-inset-bottom,0px))}
+.sthero{background:var(--card);border-radius:30px;padding:22px 20px;text-align:center;margin:10px 0 6px}
+.brand{display:flex;align-items:center;justify-content:center;gap:14px;font-size:34px;font-weight:800;line-height:1.2}
+.lg{width:58px;height:58px;border-radius:17px;background:var(--tk);border:1px solid var(--wd);display:flex;align-items:center;justify-content:center}
+.sthero p{margin:12px 0 12px;font-size:17px;line-height:1.7}
+.mcs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:0 0 18px}
+.mcs span{display:flex;align-items:center;gap:5px;background:var(--wd);border-radius:99px;padding:5px 9px;font-size:13px;white-space:nowrap}
+.mcs .dt{width:10px;height:10px}
+.stb{border:0;background:var(--or);color:var(--on);font:inherit;font-weight:700;font-size:17px;border-radius:99px;padding:12px 34px;cursor:pointer}
+.stb.full{display:block;width:100%;border-radius:20px;margin-top:18px;padding:14px}
+.sts{font-size:18px;font-weight:700;color:var(--mu);margin:28px 10px 10px}
+.stg{background:var(--card);border-radius:28px;overflow:hidden}
+.stn{color:var(--mu);font-size:13px;line-height:1.8;margin:8px 14px 0}
+.rw{position:relative;display:flex;align-items:center;gap:14px;width:100%;min-height:62px;padding:0 18px;background:none;border:0;color:var(--tx);font:inherit;font-size:17px;text-align:start;cursor:pointer}
+button.rw:active,label.rw:active{background:var(--wd)}
+.rw+.rw::before{content:"";position:absolute;top:0;inset-inline:64px 18px;height:1px;background:var(--wd)}
+.rw+.rw.ni::before{inset-inline-start:18px}
+.ri{width:28px;height:28px;flex:none;color:var(--or);display:flex;align-items:center;justify-content:center}
+.rl{flex:1;min-width:0}
+.rv{color:var(--mu);font-size:16px}
+.rv.ac{color:var(--or);display:flex;align-items:center;gap:6px;font-weight:600}
+.chv{color:var(--mu);flex:none}
+.dt{width:14px;height:14px;border-radius:50%;display:block}
+.nm{font-size:16px;font-weight:800}
+.rw.red{color:var(--rtx)}
+.ovs{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;opacity:0;cursor:pointer;font-size:16px}
+.fi{width:96px;margin:0;padding:8px 10px;background:var(--wd);border:0;border-radius:12px;font-size:17px;font-weight:700;text-align:center;color:var(--tx)}
+.fi.lg2{width:58%;font-weight:500;text-align:start}
+.fu{color:var(--mu);font-size:14px;min-width:34px}
+.sw{direction:ltr;width:56px;height:34px;border-radius:99px;background:var(--wd);position:relative;flex:none;transition:background .2s}
+.sw i{position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:left .2s}
+.sw.on{background:var(--or)}.sw.on i{left:25px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tc{border:0;background:none;color:var(--tx);font:inherit;font-size:15px;padding:0;cursor:pointer;display:flex;flex-direction:column;gap:8px;text-align:center}
+.tc.wide{width:100%;margin-top:8px}
+.tp{height:92px;border-radius:18px;background:var(--bg);border:1px solid color-mix(in srgb,var(--mu) 35%,transparent);padding:10px;display:flex;flex-direction:column;gap:8px;justify-content:center}
+.tp.auto{background:linear-gradient(105deg,#000 50%,#f2f2f7 50%);height:54px}
+.tpc{background:var(--card);border-radius:11px;padding:9px;display:flex;flex-direction:column;gap:6px}
+.tpc i{display:block;height:8px;width:55%;border-radius:9px;background:var(--or)}
+.tpc b{display:block;height:6px;width:32%;border-radius:9px;background:var(--mu)}
+.tpd{display:flex;gap:6px;padding-inline-start:4px}
+.tpd u{width:14px;height:6px;border-radius:9px;display:block}
+.tc.sel .tp{outline:2.5px solid var(--or);outline-offset:2px}
+.tc.sel span::after{content:" ✓";color:var(--or);font-weight:800}
+.rw:focus-visible,.stc:focus-visible,.stb:focus-visible,.tc:focus-visible{outline:2px solid var(--or);outline-offset:2px}
 </style>
 </head>
 <body>
 <div class="app" id="app"></div>
 <div id="layer"></div>
+<div id="set"></div>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const ar=s=>String(s).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]).replace(/\./g,'٫');
+const ar=s=>S.en?String(s):String(s).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]).replace(/\./g,'٫');
 const K='sa3rati_v1';
 const DEF={sex:'m',age:25,h:170,w:70,act:1.375,goal:0,kcal:2200,p:165,c:275,f:49};
 let S=null;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
-S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=/^gsk_/.test(S.key||'')?S.key:'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';S.model=(S.model&&!/gemini/.test(S.model)&&S.model!=='llama-3.3-70b-versatile')?S.model:'auto';
+S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=/^gsk_/.test(S.key||'')?S.key:'';S.theme=S.theme||'auto';S.unit=S.unit||'kg';S.model=(S.model&&!/gemini/.test(S.model)&&S.model!=='llama-3.3-70b-versatile')?S.model:'auto';
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const LOC=()=>S.en?'ar-EG-u-nu-latn':'ar-EG';
+const wu=()=>S.unit==='lb'?'lb':'كجم',wv=kg=>S.unit==='lb'?kg*2.20462:kg,wk=v=>S.unit==='lb'?v/2.20462:v,fw=kg=>ar(+wv(kg).toFixed(1));
+const TH={orange:['برتقالي','d'],mint:['نعناع','d'],ocean:['محيط','d'],sunset:['غروب','d'],violet:['بنفسجي','d'],mono:['أسود وأبيض','d'],day:['نهاري','l'],sage:['زيتوني','l'],rose:['وردي','l']};
+const mq=matchMedia('(prefers-color-scheme: dark)');
+function applyTheme(){const id=TH[S.theme]?S.theme:(mq.matches?'orange':'day');document.documentElement.dataset.theme=id;const m=document.querySelector('meta[name=theme-color]');if(m)m.content=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#000'}
+if(mq.addEventListener)mq.addEventListener('change',()=>{if(!TH[S.theme])applyTheme()});
+applyTheme();
 const dk=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')};
 const pd=k=>{const[a,b,c]=k.split('-');return new Date(+a,+b-1,+c)};
 const today=dk(new Date());
@@ -172,21 +240,21 @@ function home(){
   const P=S.profile,t=tot(cur),cd=pd(cur),C=2*Math.PI*54;
   const st=new Date(cd);st.setDate(st.getDate()-((cd.getDay()+1)%7));
   const days=[...Array(7)].map((_,i)=>{const d=new Date(st);d.setDate(st.getDate()+i);return d}),en=days[6];
-  const mo=d=>d.toLocaleDateString('ar-EG',{month:'long'});
+  const mo=d=>d.toLocaleDateString(LOC(),{month:'long'});
   const ws=S.weights,delta=ws.length>1?ws[ws.length-1].w-ws[0].w:0;
   // ring segments
-  let segs=[[t.c*4,'var(--or)'],[t.f*9,'var(--rd)'],[t.p*4,'var(--bl)']],sum=segs.reduce((a,s)=>a+s[0],0),sc=sum>P.kcal?P.kcal/sum:1,cum=0;
+  let segs=[[t.c*4,'var(--cr)'],[t.f*9,'var(--rd)'],[t.p*4,'var(--bl)']],sum=segs.reduce((a,s)=>a+s[0],0),sc=sum>P.kcal?P.kcal/sum:1,cum=0;
   const arcs=segs.map(s=>{const l=s[0]/P.kcal*sc*C,r=`<circle cx="70" cy="70" r="54" fill="none" stroke="${s[1]}" stroke-width="15" stroke-dasharray="${l} ${C-l}" stroke-dashoffset="${-cum}"/>`;cum+=l;return r}).join('');
   const mb=(n,v,g,c)=>`<div class="mc"><small>${n}</small><div><b>${ar(v)}</b><span>/ ${ar(g)}g</span></div><div class="tk" style="margin:0"><i style="width:${Math.min(100,v/g*100)}%;background:${c}"></i></div></div>`;
   const ms=day(cur).slice().sort((a,b)=>b.t-a.t);
   return `<div class="top"><div><h1>${mo(cd)} ${ar(String(cd.getDate()).padStart(2,'0'))}</h1><small>${mo(st)} ${ar(String(st.getDate()).padStart(2,'0'))} - ${mo(en)} ${ar(String(en.getDate()).padStart(2,'0'))}</small></div>
-  <div class="ctl"><button class="cb w" onclick="openWeight()"><span>kg ${ar(Math.abs(delta).toFixed(1))}</span><i>${delta<0?'↓':delta>0?'↑':'→'}</i></button><button class="cb" onclick="openSettings()" aria-label="الإعدادات">⚙️</button></div></div>
+  <div class="ctl"><button class="cb w" onclick="openWeight()"><span>${S.unit==='lb'?'lb':'kg'} ${ar(Math.abs(wv(delta)).toFixed(1))}</span><i>${delta<0?'↓':delta>0?'↑':'→'}</i></button><button class="cb" onclick="openSettings()" aria-label="الإعدادات">⚙️</button></div></div>
   <div class="week">${days.map(d=>{const k=dk(d),p=Math.min(1,tot(k).k/P.kcal),c=2*Math.PI*21;return `<button class="wd ${k===cur?'sel':''}" onclick="cur='${k}';render()"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="var(--wd)"/><circle cx="24" cy="24" r="21" fill="none" stroke="var(--or)" stroke-width="4" stroke-linecap="round" stroke-dasharray="${p*c} ${c}" opacity="${p?1:0}"/></svg><span>${L[d.getDay()]}</span></button>`}).join('')}</div>
-  <div class="card big"><div><div class="n">${ar(t.k)}</div><div class="s" onclick="openSettings()">من ${ar(P.kcal)} سعر حراري ✎</div></div>
-  <div class="ring"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="54" fill="none" stroke="#000" stroke-width="15"/>${arcs}</svg><b>🥕</b></div></div>
+  <div class="card big"><div><div class="n">${ar(t.k)}</div><div class="s" onclick="openSettings('goals')">من ${ar(P.kcal)} سعر حراري ✎</div></div>
+  <div class="ring"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="54" fill="none" stroke="var(--tk)" stroke-width="15"/>${arcs}</svg><b>🥕</b></div></div>
   <div class="mac">${mb('البروتينات',t.p,P.p,'var(--bl)')}${mb('الكربوهيدرات',t.c,P.c,'var(--ye)')}${mb('دهون',t.f,P.f,'var(--rd)')}</div>
   <div class="dv">الوجبات</div>
-  ${ms.length?ms.map(i=>`<div class="meal" onclick="editMeal('${i.id}')"><div class="me">${esc(i.emoji||'🍽️')}</div><div class="mb"><div class="mt"><b>${esc(i.name)}</b><small>${i.t?new Date(i.t).toLocaleTimeString('ar-EG',{hour:'numeric',minute:'2-digit'}):''}</small></div>
+  ${ms.length?ms.map(i=>`<div class="meal" onclick="editMeal('${i.id}')"><div class="me">${esc(i.emoji||'🍽️')}</div><div class="mb"><div class="mt"><b>${esc(i.name)}</b><small>${i.t?new Date(i.t).toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'}):''}</small></div>
   <div class="mm"><span class="k"><b>${ar(i.kcal)}</b> كيلو كالوري 🥕</span><i class="sp"></i><em style="--c:var(--bl)">${ar(i.p)} g</em><em style="--c:var(--ye)">${ar(i.c)} g</em><em style="--c:var(--rd)">${ar(i.f)} g</em></div></div></div>`).join(''):'<div class="empty">لسه مفيش وجبات في اليوم ده.<br>اضغط + واكتب اللي أكلته 🍽️</div>'}`;
 }
 
@@ -232,9 +300,9 @@ function delMeal(){S.logs[cur]=day(cur).filter(i=>i.id!==editId);save();closeS()
 
 /* ---------- weight ---------- */
 function openWeight(){const W=S.weights.slice(-6).reverse();wrap(`<div class="hd"><h2>⚖️ الوزن</h2><button class="x" onclick="closeS()">×</button></div>
-  <div class="g2"><input id="wt" type="number" step="0.1" placeholder="وزنك اليوم (كجم)"><button class="btn" style="margin:4px 0" onclick="addW()">سجّل</button></div>
-  ${W.map(w=>`<div class="sub" style="display:flex;justify-content:space-between"><span class="mu">${ar(w.d)}</span><b>${ar(w.w)} كجم</b></div>`).join('')||'<p class="mu">سجّل وزنك بانتظام وهتشوف التغيير هنا.</p>'}`)}
-function addW(){const v=+$('#wt').value;if(!v)return;S.weights=S.weights.filter(w=>w.d!==today).concat({d:today,w:v});S.profile.w=v;save();closeS();render()}
+  <div class="g2"><input id="wt" type="number" step="0.1" placeholder="وزنك اليوم (${wu()})"><button class="btn" style="margin:4px 0" onclick="addW()">سجّل</button></div>
+  ${W.map(w=>`<div class="sub" style="display:flex;justify-content:space-between"><span class="mu">${ar(w.d)}</span><b>${fw(w.w)} ${wu()}</b></div>`).join('')||'<p class="mu">سجّل وزنك بانتظام وهتشوف التغيير هنا.</p>'}`)}
+function addW(){const v=Math.round(wk(+$('#wt').value)*100)/100;if(!v)return;S.weights=S.weights.filter(w=>w.d!==today).concat({d:today,w:v});S.profile.w=v;save();closeS();render()}
 
 /* ---------- progress ---------- */
 function progress(){
@@ -265,31 +333,131 @@ async function ask(q){
 }
 
 /* ---------- settings ---------- */
-function openSettings(){
-  const P=S.profile,o=(v,l,s)=>`<option value="${v}" ${String(s)===String(v)?'selected':''}>${l}</option>`;
-  wrap(`<div class="hd"><h2>الإعدادات</h2><button class="x" onclick="closeS()">×</button></div>
-  <div class="sub"><b>الأهداف اليومية</b><div class="g2"><div><label>سعرات</label><input id="gk" type="number" value="${P.kcal}"></div><div><label>بروتين (جم)</label><input id="gp" type="number" value="${P.p}"></div><div><label>كارب (جم)</label><input id="gc" type="number" value="${P.c}"></div><div><label>دهون (جم)</label><input id="gf" type="number" value="${P.f}"></div></div></div>
-  <div class="sub"><b>احسبلي أهدافي</b><div class="g2"><div><label>النوع</label><select id="sx">${o('m','ذكر',P.sex)}${o('f','أنثى',P.sex)}</select></div><div><label>السن</label><input id="ag" type="number" value="${P.age}"></div><div><label>الطول (سم)</label><input id="ht" type="number" value="${P.h}"></div><div><label>الوزن (كجم)</label><input id="wg" type="number" value="${P.w}"></div></div>
-  <label>النشاط</label><select id="ac">${o(1.2,'قليل (مكتبي)',P.act)}${o(1.375,'خفيف (٢-٣ تمارين)',P.act)}${o(1.55,'متوسط (٤-٥ تمارين)',P.act)}${o(1.725,'عالي (يومي)',P.act)}</select>
-  <label>الهدف</label><select id="gl">${o(-500,'خسارة وزن',P.goal)}${o(0,'تثبيت الوزن',P.goal)}${o(400,'زيادة وزن',P.goal)}</select>
-  <button class="btn sec" onclick="calc()">احسب تلقائيًا</button></div>
-  <div class="sub"><b>مفتاح Groq API</b><input id="ky" type="password" dir="ltr" placeholder="gsk_…" value="${esc(S.key)}"><label>الموديل</label><input id="md" dir="ltr" value="${esc(S.model)}">
-  <p class="mu">المفتاح بيتحفظ في متصفحك بس. الاتصال بـ Groq بيشتغل لما تفتح الملف على جهازك أو استضافتك، ومش بيشتغل جوه صفحة claude.ai (بتستخدم الذكاء المدمج بدلها).</p></div>
-  <button class="btn" onclick="saveP()">حفظ</button>
-  <button class="btn red" onclick="if(confirm('مسح كل البيانات؟')){S={};localStorage.removeItem(K);location.reload()}">مسح كل البيانات</button>`);
+let SP='main';
+const SV=(p,x='')=>`<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${x}>${p}</svg>`;
+const SM=(p,w=18)=>`<svg viewBox="0 0 24 24" width="${w}" height="${w}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const IC={
+ goal:SV('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/>'),
+ body:SV('<circle cx="12" cy="4.5" r="2"/><path d="M5 9h14M12 9v6M9 21l3-6 3 6"/>'),
+ unit:SV('<path d="M4 16L16 4l4 4L8 20z"/><path d="M8 12l2 2M11 9l2 2M14 6l2 2"/>'),
+ store:SV('<rect x="3" y="13" width="18" height="7" rx="2"/><path d="M5 13l2-7h10l2 7"/><path d="M7 16.5h.01M11 16.5h.01"/>'),
+ theme:SV('<path d="M12 3a9 9 0 100 18c1.4 0 2-1 1.6-2.1-.5-1.2.3-2.4 1.6-2.4H17a4 4 0 004-4c0-5-4-9.5-9-9.5z"/><circle cx="7.5" cy="11" r=".8" fill="currentColor"/><circle cx="10" cy="7" r=".8" fill="currentColor"/><circle cx="14.5" cy="7" r=".8" fill="currentColor"/>'),
+ ai:SV('<path d="M12 3l2 5.5 5.5 2-5.5 2L12 18l-2-5.5-5.5-2L10 8.5z"/><path d="M19 17v4M17 19h4"/>'),
+ num:'<b class="nm">١٢٣</b>',
+ chv:`<span class="chv">${SM('<path d="M15 5l-7 7 7 7"/>')}</span>`,
+ ud:SM('<path d="M8 9l4-4 4 4M8 15l4 4 4-4"/>'),
+ back:SM('<path d="M9 5l7 7-7 7"/>',22),
+ x:SM('<path d="M6 6l12 12M18 6L6 18"/>',22)
+};
+const dot=c=>`<i class="dt" style="background:${c}"></i>`;
+const OPT={
+ sex:[['m','ذكر'],['f','أنثى']],
+ act:[[1.2,'قليل (مكتبي)'],[1.375,'خفيف (٢-٣ تمارين)'],[1.55,'متوسط (٤-٥ تمارين)'],[1.725,'عالي (يومي)']],
+ goal:[[-500,'خسارة وزن'],[0,'تثبيت الوزن'],[400,'زيادة وزن']],
+ unit:[['kg','كيلوجرام'],['lb','رطل']]
+};
+const lab=(k,v)=>(OPT[k].find(o=>String(o[0])===String(v))||[0,''])[1];
+const row=(ic,l,v,fn)=>`<button class="rw ${ic?'':'ni'}" onclick="${fn}">${ic?`<span class="ri">${ic}</span>`:''}<span class="rl">${l}</span><span class="rv">${v||''}</span>${IC.chv}</button>`;
+const selRow=(ic,l,k,cur,fn)=>`<div class="rw ${ic?'':'ni'}">${ic?`<span class="ri">${ic}</span>`:''}<span class="rl">${l}</span><span class="rv ac" id="v_${k}">${lab(k,cur)}${IC.ud}</span><select class="ovs" aria-label="${l}" onchange="${fn}">${OPT[k].map(o=>`<option value="${o[0]}" ${String(o[0])===String(cur)?'selected':''}>${o[1]}</option>`).join('')}</select></div>`;
+const fld=(ic,l,u,v,fn)=>`<div class="rw ${ic?'':'ni'}">${ic?`<span class="ri">${ic}</span>`:''}<span class="rl">${l}</span><input class="fi" type="number" inputmode="decimal" dir="ltr" value="${v}" onchange="${fn}"><span class="fu">${u}</span></div>`;
+const themeName=()=>TH[S.theme]?TH[S.theme][0]:'تلقائي';
+
+function stBody(){
+  const P=S.profile;
+  if(SP==='goals')return['الأهداف اليومية',`<div class="stg" style="margin-top:14px">
+    ${fld(dot('var(--or)'),'السعرات','سعر',P.kcal,"setP('kcal',this.value)")}
+    ${fld(dot('var(--bl)'),'البروتين','جم',P.p,"setP('p',this.value)")}
+    ${fld(dot('var(--ye)'),'الكربوهيدرات','جم',P.c,"setP('c',this.value)")}
+    ${fld(dot('var(--rd)'),'الدهون','جم',P.f,"setP('f',this.value)")}</div>
+    <p class="stn">كل جرام بروتين أو كارب = ٤ سعرات، وكل جرام دهون = ٩ سعرات.</p>
+    <div class="stg" style="margin-top:24px">${row(IC.body,'احسب أهدافي من قياسات جسمي','',"goSet('body')")}</div>`];
+  if(SP==='body')return['قياسات الجسم',`<div class="stg" style="margin-top:14px">
+    ${selRow('','النوع','sex',P.sex,"setSel('sex',this.value)")}
+    ${fld('','السن','سنة',P.age,"setP('age',this.value)")}
+    ${fld('','الطول','سم',P.h,"setP('h',this.value)")}
+    ${fld('','الوزن',wu(),+wv(P.w).toFixed(1),"setP('w',wk(+this.value))")}</div>
+    <div class="stg" style="margin-top:18px">
+    ${selRow('','النشاط','act',P.act,"setSel('act',this.value)")}
+    ${selRow('','الهدف','goal',P.goal,"setSel('goal',this.value)")}</div>
+    <button class="stb full" onclick="calc()">احسب أهدافي تلقائيًا</button>
+    <p class="stn">الحساب بمعادلة Mifflin-St Jeor، وتقدر تعدّل الأرقام يدويًا بعد كده من الأهداف اليومية.</p>`];
+  if(SP==='theme'){
+    const card=id=>`<button class="tc ${S.theme===id?'sel':''}" data-id="${id}" onclick="setTheme('${id}')"><div class="tp" data-theme="${id}"><div class="tpc"><i></i><b></b></div><div class="tpd"><u style="background:var(--bl)"></u><u style="background:var(--ye)"></u><u style="background:var(--rd)"></u></div></div><span>${TH[id][0]}</span></button>`;
+    const ids=m=>Object.keys(TH).filter(k=>TH[k][1]===m);
+    return['الثيم',`<button class="tc wide ${TH[S.theme]?'':'sel'}" data-id="auto" onclick="setTheme('auto')"><div class="tp auto"></div><span>تلقائي (حسب النظام)</span></button>
+    <div class="sts">داكن</div><div class="tgrid">${ids('d').map(card).join('')}</div>
+    <div class="sts">فاتح</div><div class="tgrid">${ids('l').map(card).join('')}</div>`];
+  }
+  if(SP==='ai')return['الذكاء الاصطناعي',`<div class="stg" style="margin-top:14px">
+    <div class="rw ni"><span class="rl">المفتاح</span><input class="fi lg2" type="password" dir="ltr" placeholder="gsk_…" value="${esc(S.key)}" onchange="S.key=this.value.trim();AV=null;save()"></div>
+    <div class="rw ni"><span class="rl">الموديل</span><input class="fi lg2" dir="ltr" value="${esc(S.model)}" onchange="S.model=this.value.trim()||'auto';AV=null;save()"></div></div>
+    <p class="stn">المفتاح بيتحفظ في متصفحك بس. الاتصال بـ Groq بيشتغل لما تفتح الملف على جهازك أو استضافتك، ومش بيشتغل جوه صفحة claude.ai (بتستخدم الذكاء المدمج بدلها).</p>`];
+  if(SP==='data'){
+    const ds=Object.keys(S.logs).filter(k=>S.logs[k].length),ml=ds.reduce((n,k)=>n+S.logs[k].length,0);
+    const info=(l,v)=>`<div class="rw ni"><span class="rl">${l}</span><span class="rv">${ar(v)}</span></div>`;
+    return['التخزين',`<div class="stg" style="margin-top:14px">${info('الأيام المسجلة',ds.length)}${info('الوجبات',ml)}${info('قياسات الوزن',S.weights.length)}</div>
+    <div class="sts">النسخ الاحتياطي</div>
+    <div class="stg"><button class="rw ni" onclick="expData()"><span class="rl">تصدير نسخة احتياطية</span>${IC.chv}</button>
+    <label class="rw ni"><span class="rl">استيراد نسخة</span>${IC.chv}<input type="file" accept="application/json,.json" hidden onchange="impData(this)"></label></div>
+    <p class="stn">النسخة بتحفظ الوجبات والأهداف والأوزان وإعدادات المظهر. مفتاح Groq مش بيتصدّر.</p>
+    <div class="sts">منطقة الخطر</div>
+    <div class="stg"><button class="rw ni red" onclick="wipe()"><span class="rl">مسح كل البيانات</span></button></div>`];
+  }
+  // main
+  const ring=`<svg viewBox="0 0 54 54" width="40" height="40" style="transform:rotate(-90deg)" fill="none" stroke-width="8"><circle cx="27" cy="27" r="19" stroke="var(--wd)"/><circle cx="27" cy="27" r="19" stroke="var(--cr)" stroke-dasharray="42 77.4"/><circle cx="27" cy="27" r="19" stroke="var(--rd)" stroke-dasharray="22 97.4" stroke-dashoffset="-45"/><circle cx="27" cy="27" r="19" stroke="var(--bl)" stroke-dasharray="28 91.4" stroke-dashoffset="-70"/></svg>`;
+  return['الإعدادات',`<div class="sthero"><div class="brand"><span>سعراتي</span><span class="lg">${ring}</span></div>
+    <p>هدفك اليومي <b>${ar(P.kcal)}</b> سعر حراري</p>
+    <div class="mcs"><span>${dot('var(--bl)')}بروتين ${ar(P.p)}g</span><span>${dot('var(--ye)')}كارب ${ar(P.c)}g</span><span>${dot('var(--rd)')}دهون ${ar(P.f)}g</span></div>
+    <button class="stb" onclick="goSet('goals')">عدّل أهدافك</button></div>
+    <div class="sts">عام</div>
+    <div class="stg">
+     ${row(IC.goal,'الأهداف اليومية',ar(P.kcal)+' سعر',"goSet('goals')")}
+     ${row(IC.body,'قياسات الجسم',fw(P.w)+' '+wu(),"goSet('body')")}
+     ${selRow(IC.unit,'وحدة الوزن','unit',S.unit,"setUnit(this.value)")}
+     ${row(IC.store,'التخزين','',"goSet('data')")}
+    </div>
+    <div class="sts">المظهر</div>
+    <div class="stg">${row(IC.theme,'الثيم',themeName(),"goSet('theme')")}</div>
+    <div class="sts">الذكاء الاصطناعي</div>
+    <div class="stg">${row(IC.ai,'مفتاح Groq والموديل',S.key?'مفعّل':'غير مضاف',"goSet('ai')")}</div>
+    <div class="sts">الإضافات</div>
+    <div class="stg"><button class="rw" onclick="togNum(this)"><span class="ri">${IC.num}</span><span class="rl">الأرقام العربية</span><span class="sw ${S.en?'':'on'}"><i></i></span></button></div>
+    <p class="stn">لو قفلتها، الأرقام هتظهر بالشكل ده 0123 في كل التطبيق.</p>`];
 }
+function drawSettings(){
+  const[t,h]=stBody();
+  $('#set').innerHTML=`<div class="stp"><div class="sth">${SP==='main'?'<span></span>':`<button class="stc" onclick="goSet('main')" aria-label="رجوع">${IC.back}</button>`}<h1>${t}</h1><button class="stc" onclick="closeSettings()" aria-label="إغلاق">${IC.x}</button></div><div class="stin">${h}</div></div>`;
+  document.body.style.overflow='hidden';
+}
+function openSettings(p){SP=p||'main';drawSettings()}
+const goSet=p=>{SP=p;drawSettings()};
+function closeSettings(){$('#set').innerHTML='';document.body.style.overflow='';render()}
+function setP(k,v){v=+v;if(!isFinite(v)||v<=0)return toast('رقم مش صحيح');if(k==='w')v=Math.round(v*100)/100;S.profile[k]=v;save()}
+function setSel(k,v){S.profile[k]=k==='sex'?v:+v;save();const e=$('#v_'+k);if(e)e.firstChild.nodeValue=lab(k,v)}
+function setUnit(v){S.unit=v;save();const e=$('#v_unit');if(e)e.firstChild.nodeValue=lab('unit',v);goSet('main')}
+function togNum(b){S.en=!S.en;save();b.querySelector('.sw').classList.toggle('on',!S.en)}
+function setTheme(id){S.theme=id;save();applyTheme();document.querySelectorAll('.tc').forEach(e=>e.classList.toggle('sel',e.dataset.id===id))}
 function calc(){
-  const v=id=>+$('#'+id).value,w=v('wg'),bmr=10*w+6.25*v('ht')-5*v('ag')+($('#sx').value==='m'?5:-161);
-  const k=Math.max(1200,Math.round(bmr*v('ac')+v('gl')));
+  const P=S.profile,w=P.w,bmr=10*w+6.25*P.h-5*P.age+(P.sex==='m'?5:-161),k=Math.max(1200,Math.round(bmr*P.act+P.goal));
   const p=Math.round(w*1.8),f=Math.round(k*.27/9),c=Math.max(0,Math.round((k-p*4-f*9)/4));
-  $('#gk').value=k;$('#gp').value=p;$('#gc').value=c;$('#gf').value=f;toast('اتحسبت الأهداف ✓');
+  Object.assign(P,{kcal:k,p,c,f});save();toast('اتحسبت الأهداف ✓');goSet('goals');
 }
-function saveP(){
-  const v=id=>+$('#'+id).value;
-  S.profile={sex:$('#sx').value,age:v('ag'),h:v('ht'),w:v('wg'),act:v('ac'),goal:v('gl'),kcal:v('gk')||2000,p:v('gp'),c:v('gc'),f:v('gf')};
-  S.key=$('#ky').value.trim();S.model=$('#md').value.trim()||'auto';
-  save();closeS();render();
+function expData(){
+  const o={...S};delete o.key;
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:'application/json'}));a.download='sa3rati-'+today+'.json';
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500);toast('اتصدّرت النسخة ✓');
 }
+async function impData(i){
+  const f=i.files[0];if(!f)return;
+  try{
+    const o=JSON.parse(await f.text());if(!o||typeof o.logs!=='object'||!o.profile)throw 0;
+    if(!confirm('هيتم استبدال بياناتك الحالية بالنسخة دي. متأكد؟')){i.value='';return}
+    const k=S.key;S=Object.assign({logs:{},weights:[]},o,{key:k});S.model=S.model||'auto';S.theme=S.theme||'auto';S.unit=S.unit||'kg';
+    save();applyTheme();toast('اتستوردت النسخة ✓');goSet('data');
+  }catch(e){toast('الملف مش نسخة صالحة')}
+  i.value='';
+}
+function wipe(){if(confirm('مسح كل البيانات؟')){S={};localStorage.removeItem(K);location.reload()}}
 render();
 </script>
 </body>
