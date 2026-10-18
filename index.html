@@ -2,7 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="theme-color" content="#000">
+<meta name="theme-color" content="#17140f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="سعراتي">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>سعراتي</title>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
@@ -220,6 +227,26 @@ body{font-family:'Rubik','Cairo',system-ui,sans-serif}
 @keyframes shm{to{background-position:-220% 0}}
 .lnk{display:block;margin:14px auto 0;border:0;background:none;color:var(--mu);font:inherit;text-decoration:underline;cursor:pointer}
 .wtr{width:66px}.wrow{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:6px}.wrow .wbar{margin:0}
+
+/* v5: app feel + motion */
+html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+input,textarea,select{-webkit-user-select:text;user-select:text;font-size:16px}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.98)}}
+@keyframes pop{50%{transform:scale(1.25)}}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,-20px)}}
+.pg.in>*,.stin.in>*,.ov.op .sheet>*{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.pg.in>*:nth-child(2),.stin.in>*:nth-child(2),.ov.op .sheet>*:nth-child(2){animation-delay:0.05s}
+.pg.in>*:nth-child(3),.stin.in>*:nth-child(3),.ov.op .sheet>*:nth-child(3){animation-delay:0.10s}
+.pg.in>*:nth-child(4),.stin.in>*:nth-child(4),.ov.op .sheet>*:nth-child(4){animation-delay:0.15s}
+.pg.in>*:nth-child(5),.stin.in>*:nth-child(5),.ov.op .sheet>*:nth-child(5){animation-delay:0.20s}
+.pg.in>*:nth-child(6),.stin.in>*:nth-child(6),.ov.op .sheet>*:nth-child(6){animation-delay:0.25s}
+.pg.in>*:nth-child(7),.stin.in>*:nth-child(7),.ov.op .sheet>*:nth-child(7){animation-delay:0.30s}
+.pg.in>*:nth-child(8),.stin.in>*:nth-child(8),.ov.op .sheet>*:nth-child(8){animation-delay:0.35s}
+.tb.on svg{animation:pop .35s}
+.toast{animation:toastIn .35s cubic-bezier(.2,.8,.2,1)}
+.meal,.d,.man,.pill,.go,.cbtn,.stb,.go2,.rw,.tc{transition:transform .15s,background .2s}
+.meal:active,.d:active,.man:active,.pill:active,.go:active,.cbtn:active,.stb:active,.tc:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -248,7 +275,7 @@ const dk=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+
 const pd=k=>{const[a,b,c]=k.split('-');return new Date(+a,+b-1,+c)};
 const today=dk(new Date());
 let cur=today,tab='home',AI=null,chat=[],imgOK=false;
-(async()=>{try{if(window.claude){AI=await claude.use('sample');try{imgOK=!!(await AI.limits()).images}catch(e){}}}catch(e){AI=null}render()})();
+(async()=>{try{if(window.claude){AI=await claude.use('sample');try{imgOK=!!(await AI.limits()).images}catch(e){}}}catch(e){AI=null}setTimeout(render)})();
 const norm=o=>({name:String(o.name||'وجبة'),emoji:o.emoji||'🍽️',kcal:Math.round(+o.kcal||0),p:Math.round(+o.p||0),c:Math.round(+o.c||0),f:Math.round(+o.f||0)});
 const day=d=>S.logs[d]||[];
 const tot=d=>day(d).reduce((a,i)=>({k:a.k+i.kcal,p:a.p+i.p,c:a.c+i.c,f:a.f+i.f}),{k:0,p:0,c:0,f:0});
@@ -562,6 +589,7 @@ L.addEventListener('touchstart',e=>{if(e.target.classList.contains('hnd')){sh=e.
 L.addEventListener('touchmove',e=>{if(sh)sh.style.transform='translateY('+Math.max(0,e.touches[0].clientY-y0)+'px)'},{passive:true});
 L.addEventListener('touchend',e=>{if(!sh)return;const d=e.changedTouches[0].clientY-y0;sh.style.transition='transform .25s';if(d>110)closeS();else sh.style.transform='';sh=null})})();
 render();
+if('serviceWorker'in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>
