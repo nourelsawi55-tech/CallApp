@@ -261,7 +261,7 @@ const ar=s=>!S.ard?String(s):String(s).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d
 const K='sa3rati_v1';
 const DEF={sex:'m',age:25,h:170,w:70,act:1.375,goal:0,kcal:2200,p:165,c:275,f:49};
 let S=null;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
-S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=/^gsk_/.test(S.key||'')?S.key:'';S.water=S.water||{};S.unit=S.unit||'kg';S.model=(S.model&&!/gemini/.test(S.model)&&S.model!=='llama-3.3-70b-versatile')?S.model:'auto';
+S=S||{};S.logs=S.logs||{};S.weights=S.weights||[];S.profile=S.profile||{...DEF};S.key=/^gsk_/.test(S.key||'')?S.key:'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';S.water=S.water||{};S.unit=S.unit||'kg';S.model=(S.model&&!/gemini/.test(S.model)&&S.model!=='llama-3.3-70b-versatile')?S.model:'auto';
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
 const LOC=()=>S.ard?'ar-EG':'ar-EG-u-nu-latn';
 const wu=()=>S.unit==='lb'?'lb':'كجم',wv=kg=>S.unit==='lb'?kg*2.20462:kg,wk=v=>S.unit==='lb'?v/2.20462:v,fw=kg=>ar(+wv(kg).toFixed(1));
